@@ -10,14 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#19191a;
-    --bg-soft:#212123;
-    --border:#2e2e30;
-    --text:#f4f2ec;
-    --text-muted:#9c9b97;
+    --bg:#656565;
+    --bg-soft:#707070;
+    --border:#525252;
+    --text:#eeeeec;
+    --text-muted:#cbcbcb;
     --accent:#e7a94c;
     --accent-dark:#c98f36;
-    --accent-soft:rgba(231,169,76,.13);
+    --accent-soft:rgba(231,169,76,.18);
     --font-sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     --font-mono:'IBM Plex Mono','SFMono-Regular',Consolas,'Liberation Mono',monospace;
     --radius-lg:20px;
@@ -104,7 +104,7 @@
     transform:translateX(-50%);
     z-index:1000;
     width:min(920px, calc(100% - 32px));
-    background:rgba(25,25,26,.6);
+    background:rgba(101,101,101,.62);
     border:1px solid rgba(255,255,255,.08);
     backdrop-filter:blur(14px);
     -webkit-backdrop-filter:blur(14px);
@@ -113,7 +113,7 @@
     transition:background .3s ease, border-color .3s ease, box-shadow .3s ease;
   }
   .nav.scrolled{
-    background:rgba(20,20,21,.85);
+    background:rgba(90,90,90,.88);
     border-color:rgba(255,255,255,.12);
   }
   .nav-inner{
@@ -286,9 +286,14 @@
   }
   .hero-secondary:hover{ color:var(--accent); }
 
-  .node-graph-wrap{
+  .hero-visual{
+    position:relative;
     width:420px;
+    height:420px;
     flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
   .node-graph{ width:100%; height:auto; overflow:visible; }
   .ng-lines line{ stroke:var(--border); stroke-width:1.4; }
@@ -305,8 +310,45 @@
     50%{ opacity:1; transform:scale(1.4); }
   }
 
+  /* Photo placeholder — swap for a real <img class="photo-frame-img"> when ready */
+  .photo-frame{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:208px;
+    height:208px;
+    border-radius:50%;
+    background:var(--bg-soft);
+    border:2px solid var(--accent);
+    box-shadow:0 0 0 10px var(--bg), 0 24px 50px -20px rgba(0,0,0,.5);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    overflow:hidden;
+  }
+  .photo-frame-icon{ width:56px; height:56px; color:var(--text-muted); opacity:.6; }
+  .photo-frame-label{
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+  }
+  .photo-frame-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+  }
+
   @media (max-width: 900px){
-    .node-graph-wrap{ display:none; }
+    .hero .wrap{ flex-direction:column; align-items:flex-start; gap:44px; }
+    .hero-visual{ width:200px; height:200px; align-self:center; }
+    .node-graph{ display:none; }
+    .photo-frame{ width:180px; height:180px; box-shadow:0 0 0 8px var(--bg), 0 20px 40px -18px rgba(0,0,0,.45); }
   }
   @media (max-width: 620px){
     .hero{ padding-top:calc(var(--nav-h) + 64px); }
@@ -565,8 +607,8 @@
         </div>
       </div>
 
-      <div class="node-graph-wrap" aria-hidden="true">
-        <svg class="node-graph" viewBox="0 0 460 460">
+      <div class="hero-visual">
+        <svg class="node-graph" viewBox="0 0 460 460" aria-hidden="true">
           <g class="ng-lines">
             <line x1="60" y1="300" x2="150" y2="180"/>
             <line x1="60" y1="300" x2="150" y2="380"/>
@@ -590,6 +632,17 @@
             <circle class="pulse" style="animation-delay:1.5s" cx="400" cy="340" r="6"/>
           </g>
         </svg>
+
+        <!-- PHOTO PLACEHOLDER — to add your real photo, replace the two lines
+             below (the icon svg + label span) with:
+             <img class="photo-frame-img" src="your-photo.jpg" alt="Ryan Cootauco"> -->
+        <div class="photo-frame">
+          <svg class="photo-frame-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/>
+          </svg>
+          <span class="photo-frame-label">Add Photo</span>
+        </div>
       </div>
     </div>
   </section>
